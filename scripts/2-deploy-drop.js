@@ -1,6 +1,13 @@
 import { AddressZero } from "@ethersproject/constants";
 import sdk from "./1-initialize-sdk.js";
 import { readFileSync } from "fs";
+import dotenv from "dotenv";
+dotenv.config();
+
+
+if (!process.env.EDITION_DROP_ADDRESS || process.env.EDITION_DROP_ADDRESS === "") {
+  console.log("🛑 Edition Drop Address not found.");
+}
 
 (async () => {
   try {

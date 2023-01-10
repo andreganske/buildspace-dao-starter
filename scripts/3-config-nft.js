@@ -1,9 +1,18 @@
 import sdk from "./1-initialize-sdk.js";
 import { readFileSync } from "fs";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+
+if (!process.env.EDITION_DROP_ADDRESS || process.env.EDITION_DROP_ADDRESS === "") {
+  console.log("🛑 Edition Drop Address not found.");
+}
+
 
 (async () => {
   try {
-    const editionDrop = await sdk.getContract("0xe972D668C2a1Ab7C4eb8D5d2577e7F6Fd18F89ec", "edition-drop");
+    const editionDrop = await sdk.getContract(process.env.EDITION_DROP_ADDRESS, "edition-drop");
     await editionDrop.createBatch([
       {
         name: "Digha NFT",
